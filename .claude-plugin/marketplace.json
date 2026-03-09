@@ -1,0 +1,68 @@
+{
+  "name": "harus",
+  "description": "Skills, agents, and standards for AI-assisted software engineering: orchestration, development cycles, and product planning.",
+  "owner": {
+    "name": "Leonardo Rodrigues",
+    "email": "leo_rodrigues1999@hotmail.com"
+  },
+  "plugins": [
+    {
+      "name": "core",
+      "description": "Core behavioral standards: orchestration rules, dispatch protocols, doubt-resolution hierarchy, file limits, agent delegation, memory management, and verification gates.",
+      "version": "0.1.0",
+      "source": "./core",
+      "homepage": "https://github.com/leogues/harus/tree/core",
+      "repository": "https://github.com/leogues/harus/tree/core",
+      "license": "MIT",
+      "keywords": [
+        "standards",
+        "orchestration",
+        "behavioral-patterns",
+        "agent-discipline",
+        "dispatch",
+        "verification",
+        "execution-rules"
+      ]
+    },
+    {
+      "name": "dev-team",
+      "description": "Development team standards: gate-based dev cycles, TDD enforcement, code review protocols, and quality gates for backend and frontend workflows.",
+      "version": "0.1.0",
+      "source": "./dev-team",
+      "homepage": "https://github.com/leogues/harus/tree/dev-team",
+      "repository": "https://github.com/leogues/harus/tree/dev-team",
+      "license": "MIT",
+      "keywords": [
+        "development",
+        "standards",
+        "tdd",
+        "code-review",
+        "quality-gates",
+        "backend",
+        "frontend",
+        "testing",
+        "devops"
+      ]
+    },
+    {
+      "name": "pm-team",
+      "description": "Product planning standards: structured pre-dev workflows, requirements gathering, delivery planning, task decomposition, and roadmap generation.",
+      "version": "0.1.0",
+      "source": "./pm-team",
+      "homepage": "https://github.com/leogues/harus/tree/pm-team",
+      "repository": "https://github.com/leogues/harus/tree/pm-team",
+      "license": "MIT",
+      "keywords": [
+        "product",
+        "planning",
+        "pre-dev",
+        "requirements",
+        "task-breakdown",
+        "delivery",
+        "workflow",
+        "feature-planning"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

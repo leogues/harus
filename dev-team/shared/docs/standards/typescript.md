@@ -5,27 +5,52 @@
 
 ---
 
+## Project Stack First (MANDATORY)
+
+**Always prefer the project's established stack** over alternative libraries, even if you're more familiar with the alternative.
+
+Before introducing any new dependency, check if the project already has a tool that solves the same problem. If it does, use it — do not add a competing library.
+
+| Need | Use (project stack) | Do NOT use |
+|------|---------------------|------------|
+| Logging | **Pino** (`LoggerProvider`) | Winston, Bunyan, console.log |
+| HTTP framework | **Elysia** | Express, Fastify, Hono |
+| Validation | **TypeBox** (via Elysia's `t`) | Zod, Joi, Yup, class-validator |
+| SQL / Database | **Kysely** | Prisma, TypeORM, Drizzle, Knex |
+| Dependency injection | **tsyringe** | InversifyJS, typedi, NestJS DI |
+| Test runner | **bun:test** | Jest, Vitest, Mocha |
+| HTTP test client | **Eden** (`@elysiajs/eden`) | Supertest, Axios |
+| Linting + formatting | **Biome** | ESLint + Prettier |
+| Caching | **Redis** (via `CacheProvider`) | node-cache, lru-cache |
+| Tracing | **OpenTelemetry** (`@trace()`) | custom middleware, manual spans |
+| Runtime | **Bun** | Node.js (ts-node, tsx) |
+
+> **Rule of thumb:** if the project already has a solution in its `package.json` or `shared/` layer, that IS the right tool. Only propose a new dependency when no existing tool covers the need.
+
+---
+
 ## Table of Contents
 
 | # | Section | Description |
 |---|---------|-------------|
-| 1 | [Version](#version) | TypeScript and Bun versions |
-| 2 | [Strict Configuration](#strict-configuration-mandatory) | tsconfig.json requirements |
-| 3 | [Frameworks & Libraries](#frameworks--libraries) | Required packages |
-| 4 | [Type Safety](#type-safety) | Never use `any`, use `unknown` with narrowing |
-| 5 | [TypeBox Validation Patterns](#typebox-validation-patterns) | Schema validation with Elysia's `t` |
-| 6 | [Dependency Injection](#dependency-injection) | tsyringe patterns |
-| 7 | [AsyncLocalStorage for Context](#asynclocalstorage-for-context) | Request context propagation |
-| 8 | [Testing](#testing) | Bun test runner, testcontainers, Eden client |
-| 9 | [Error Handling](#error-handling) | Exception hierarchy with BaseException |
-| 10 | [Function Design](#function-design-mandatory) | Single responsibility principle |
-| 11 | [File Organization](#file-organization-mandatory) | File-level single responsibility |
-| 12 | [Naming Conventions](#naming-conventions) | Files, interfaces, types |
-| 13 | [Directory Structure](#directory-structure) | Clean Architecture module pattern |
-| 14 | [Decorators](#decorators) | @trace, @safe, @injectable, @inject |
-| 15 | [Database Patterns](#database-patterns) | Kysely query builder conventions |
-| 16 | [Observability](#observability) | OpenTelemetry, Pino logging |
-| 17 | [Route & OpenAPI Patterns](#route--openapi-patterns) | Elysia routes with error models |
+| 1 | [Project Stack First](#project-stack-first-mandatory) | Always prefer the project's established stack |
+| 2 | [Version](#version) | TypeScript and Bun versions |
+| 3 | [Strict Configuration](#strict-configuration-mandatory) | tsconfig.json requirements |
+| 4 | [Frameworks & Libraries](#frameworks--libraries) | Required packages |
+| 5 | [Type Safety](#type-safety) | Never use `any`, use `unknown` with narrowing |
+| 6 | [TypeBox Validation Patterns](#typebox-validation-patterns) | Schema validation with Elysia's `t` |
+| 7 | [Dependency Injection](#dependency-injection) | tsyringe patterns |
+| 8 | [AsyncLocalStorage for Context](#asynclocalstorage-for-context) | Request context propagation |
+| 9 | [Testing](#testing) | Bun test runner, testcontainers, Eden client |
+| 10 | [Error Handling](#error-handling) | Exception hierarchy with BaseException |
+| 11 | [Function Design](#function-design-mandatory) | Single responsibility principle |
+| 12 | [File Organization](#file-organization-mandatory) | File-level single responsibility |
+| 13 | [Naming Conventions](#naming-conventions) | Files, interfaces, types |
+| 14 | [Directory Structure](#directory-structure) | Clean Architecture module pattern |
+| 15 | [Decorators](#decorators) | @trace, @safe, @injectable, @inject |
+| 16 | [Database Patterns](#database-patterns) | Kysely query builder conventions |
+| 17 | [Observability](#observability) | OpenTelemetry, Pino logging |
+| 18 | [Route & OpenAPI Patterns](#route--openapi-patterns) | Elysia routes with error models |
 
 **Meta-sections (not checked by agents):**
 - [Checklist](#checklist) - Self-verification before submitting code

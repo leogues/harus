@@ -85,6 +85,88 @@ The state file tracks:
 
 State **MUST** be written to disk after each gate completion — not kept only in memory.
 
+## Gate Execution Loop
+
+For each task, execute gates sequentially. This is the orchestrator's main loop.
+
+### Step 1: Initialize
+
+1. Load or create state file at `docs/harus:dev-cycle/current-cycle.json`
+2. If `--resume` → read state, find `current_task_index` and `current_gate`, continue from there
+3. If no state file and `--resume` → ERROR: "No cycle to resume"
+4. If new cycle → ask execution mode, write initial state
+
+### Step 2: For Each Task
+
+```
+for task in tasks:
+  set task.status = "in_progress"
+  for gate in [0..6]:
+    if gate in skip_gates → mark "skipped", continue
+    invoke Skill("harus:dev-{gate_name}") with gate_input
+    if result = PASS → mark "completed", persist state
+    if result = FAIL → escalation (see below)
+  set task.status = "completed"
+  if execution_mode = "manual_per_task" → checkpoint
+```
+
+### Step 3: Data Flow Between Gates
+
+Each gate produces outputs stored in `agent_outputs`. The orchestrator passes accumulated data to subsequent gates.
+
+| Gate | Receives From Previous | Produces |
+|------|----------------------|----------|
+| 0 - Implementation | requirements, language, service_type | implementation_files, commit_sha, agent_used |
+| 1 - DevOps | implementation_files, language, service_type | artifacts_created |
+| 2 - SRE | implementation_files, implementation_agent, language, service_type | validation_errors |
+| 3 - Unit Testing | implementation_files, acceptance_criteria, language | coverage_actual, verdict |
+| 4 - Integration Testing | implementation_files, language | scenarios_tested, verdict |
+| 5 - Review | implementation_files, implementation_agent, language | findings, verdict |
+| 6 - Validation | acceptance_criteria, all gate outputs as evidence | user_decision |
+
+`implementation_files` and `implementation_agent` from gate 0 are forwarded to ALL subsequent gates.
+
+### Step 4: Escalation
+
+When a gate fails after max iterations (3):
+
+| Scenario | Action |
+|----------|--------|
+| Gate 0 fails | BLOCK task — cannot proceed without implementation |
+| Gates 1-5 fail | Ask user: retry, skip gate, or abort task |
+| Gate 6 rejected | Return to gate 0 with rejection reason, restart cycle |
+
+Escalation **always** involves the user. The orchestrator CANNOT auto-skip a failing gate.
+
+### Step 5: Checkpoints
+
+| Mode | When to Pause |
+|------|---------------|
+| Manual per subtask | After each subtask completes all gates |
+| Manual per task | After each task completes all gates |
+| Automatic | Never — run until all tasks complete or error |
+
+At each checkpoint, present the cycle report and ask to continue.
+
+## `--resume` Behavior
+
+1. Read state file from `docs/harus:dev-cycle/current-cycle.json`
+2. Restore `execution_mode` from state (do not re-ask)
+3. Find `current_task_index` and `current_gate`
+4. Resume from the exact gate that was interrupted
+5. If gate was `in_progress` → re-execute it (idempotent)
+
+## `--skip-gates` Rules
+
+Gates not listed can be skipped. These CANNOT:
+
+| Gate | Why |
+|------|-----|
+| 0 - Implementation | Nothing to test/review without code |
+| 6 - Validation | User approval is mandatory |
+
+Skipped gates are marked `"status": "skipped"` in state, not `"completed"`.
+
 ## Gates
 
 Gates execute in order per task. All gates are mandatory unless skipped via `--skip-gates`.

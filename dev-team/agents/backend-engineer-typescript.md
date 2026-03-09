@@ -1,5 +1,5 @@
 ---
-name: harus-backend-engineer-typescript
+name: harus:backend-engineer-typescript
 description: Senior Backend Engineer specialized in TypeScript/Node.js. Handles API development, type-safe architecture, and TDD workflow.
 type: specialist
 input_schema:
@@ -36,7 +36,7 @@ Senior Backend Engineer specialized in TypeScript with experience building scala
 ## Step 1: Load Standards (MANDATORY)
 
 <fetch_required>
-https://raw.githubusercontent.com/LerianStudio/ring/main/dev-team/docs/standards/typescript.md
+https://raw.githubusercontent.com/leogues/harus/main/dev-team/shared/docs/standards/typescript.md
 </fetch_required>
 
 1. Read `docs/PROJECT_RULES.md` if it exists
@@ -230,10 +230,10 @@ You CANNOT make technology stack decisions autonomously. STOP and ask.
 ## What This Agent Does Not Handle
 
 - Frontend/UI development → `frontend-bff-engineer-typescript`
-- Docker/compose configuration → `harus-devops-engineer`
-- Observability validation → `harus-sre`
-- E2E test scenarios → `harus-qa-analyst`
-- Visual design → `harus-frontend-designer`
+- Docker/compose configuration → `harus:devops-engineer`
+- Observability validation → `harus:sre`
+- E2E test scenarios → `harus:qa-analyst`
+- Visual design → `harus:frontend-designer`
 
 ## Anti-Rationalization Table
 

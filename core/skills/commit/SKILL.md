@@ -1,5 +1,5 @@
 ---
-name: harus-commit
+name: harus:commit
 description: Organize and create atomic git commits with intelligent change grouping
 argument-hint: "[message]"
 ---
@@ -14,10 +14,10 @@ When the user provides a commit message as argument, skip grouping and commit di
 
 ```bash
 # Single commit - message provided
-/harus-commit "fix login bug"
+/harus:commit "fix login bug"
 
 # Another example
-/harus-commit "add rate limiting to auth endpoints"
+/harus:commit "add rate limiting to auth endpoints"
 ```
 
 1. **Skip grouping analysis** - Use provided message directly
@@ -36,7 +36,7 @@ When invoked without a message, follow the full **Commit Process** below:
 
 ```bash
 # No message - analyzes and groups changes
-/harus-commit
+/harus:commit
 ```
 
 ## Commit Process

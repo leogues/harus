@@ -1,10 +1,10 @@
 ---
-name: harus:dev-implementation
+name: harus-dev-implementation
 description: Gate 0 of the development cycle. Orchestrates code implementation by dispatching the appropriate specialized agent. Handles TDD workflow (RED → GREEN).
 metadata:
   gate: 0
-  sequence_before: harus:dev-devops
-  related: [harus:dev-cycle, harus:test-driven-development]
+  sequence_before: harus-dev-devops
+  related: [harus-dev-cycle, harus-test-driven-development]
 ---
 
 # Code Implementation (Gate 0)
@@ -22,7 +22,7 @@ This skill ORCHESTRATES. Agents IMPLEMENT.
 
 ## Step 1: Validate Input
 
-Required from `harus:dev-cycle` orchestrator:
+Required from `harus-dev-cycle` orchestrator:
 
 | Field        | Required | Description                         |
 | ------------ | -------- | ----------------------------------- |
@@ -37,7 +37,7 @@ If any required field is missing → STOP and return error to orchestrator.
 
 | Language   | Service Type            | Agent                               |
 | ---------- | ----------------------- | ----------------------------------- |
-| typescript | api, worker, batch, cli | `harus:backend-engineer-typescript` |
+| typescript | api, worker, batch, cli | `harus-backend-engineer-typescript` |
 
 If no match → ASK_USER.
 

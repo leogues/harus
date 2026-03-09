@@ -9,7 +9,7 @@ Cycle persistence and resume state. Each gate appends its own outputs to `agent_
   "started_at": "ISO timestamp",
   "updated_at": "ISO timestamp",
   "source_file": "path/to/tasks.md",
-  "state_path": "docs/harus:dev-cycle/current-cycle.json",
+  "state_path": "docs/harus-dev-cycle/current-cycle.json",
   "cycle_type": "feature | refactor",
   "execution_mode": "manual_per_subtask | manual_per_task | automatic",
   "custom_prompt": "optional user context, max 500 chars",

@@ -1,5 +1,5 @@
 ---
-name: harus:backend-engineer-typescript
+name: harus-backend-engineer-typescript
 description: Senior Backend Engineer specialized in TypeScript/Node.js. Handles API development, type-safe architecture, and TDD workflow.
 type: specialist
 input_schema:
@@ -230,10 +230,10 @@ You CANNOT make technology stack decisions autonomously. STOP and ask.
 ## What This Agent Does Not Handle
 
 - Frontend/UI development → `frontend-bff-engineer-typescript`
-- Docker/compose configuration → `harus:devops-engineer`
-- Observability validation → `harus:sre`
-- E2E test scenarios → `harus:qa-analyst`
-- Visual design → `harus:frontend-designer`
+- Docker/compose configuration → `harus-devops-engineer`
+- Observability validation → `harus-sre`
+- E2E test scenarios → `harus-qa-analyst`
+- Visual design → `harus-frontend-designer`
 
 ## Anti-Rationalization Table
 
